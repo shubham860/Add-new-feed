@@ -1,6 +1,6 @@
 import { ADD_POST, DELETE_POST } from '../actions/types';
 
-export default function postReducer(state = [], action) {
+const postReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_POST:
       return [...state, action.payload];
@@ -10,3 +10,5 @@ export default function postReducer(state = [], action) {
       return state;
   }
 }
+
+export default postReducer;
