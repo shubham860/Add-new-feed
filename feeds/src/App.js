@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Newpost from './components/Newpost'
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Newpost/>
     </div>
   );
 }
