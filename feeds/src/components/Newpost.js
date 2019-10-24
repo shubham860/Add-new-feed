@@ -1,53 +1,67 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
-class Newpost extends React.Component {
-  constructor(){
-    super()
-    this.state = {
-      title : '',
-      body : ''
-    }
-  }
+class NewPost extends React.Component {
+  state = {
+    title: '',
+    body: ''
+  };
 
-  handler = (event) => {
+  handleInputChange = e => {
     this.setState({
-      [event.target.name] : event.target.value
-    })
+      [e.target.name]: e.target.value
+    });
+  };
 
-  }
-
-  reset = (event) => {
-    this.setState({
-      title : '',
-      body  : ''
-    })
-  }
-
-  submit = (event) => {
+  handleSubmit = e => {
+    e.preventDefault();
     if (this.state.title.trim() && this.state.body.trim()) {
-      console.log(this.state);
-      this.reset();
+      this.props.onAddPost(this.state);
+      this.handleReset();
     }
-  }
+  };
 
-  render () {
-    return(
-      <div class='main'>
+  handleReset = () => {
+    this.setState({
+      title: '',
+      body: ''
+    });
+  };
 
-        <div>
-          <input type='text' name='title' onChange={this.handler} value={this.state.title} placeholder='Title'/>
-          <input type='text' name='body' onChange={this.handler} value={this.state.body} placeholder='Body'/>
-        </div>
-
-        <div>
-          <button type='submit' onClick={this.submit}>Add post</button>
-          <button type='button' onClick={this.reset}>Reset</button>
-        </div>
-        
+  render() {
+    return (
+      <div>
+          <form onSubmit={ this.handleSubmit }>
+          <div className="form-group">
+              <input
+              type="text"
+              placeholder="Title"
+              className="form-control"
+              name="title"
+              onChange={ this.handleInputChange }
+              value={ this.state.title }
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              cols="19"
+              rows="8"
+              placeholder="Body"
+              className="form-control"
+              name="body"
+              onChange={ this.handleInputChange }
+              value={ this.state.body }>
+            </textarea>
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">Add Post</button>
+            <button type="button" className="btn btn-warning" onClick={ this.handleReset }>
+              Reset
+            </button>
+          </div>
+        </form>
       </div>
-    )
+    );
   }
 }
 
-export default Newpost;
+export default NewPost;
