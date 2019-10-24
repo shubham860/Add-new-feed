@@ -12,10 +12,11 @@ const styles = {
 export default ({ post: { title, body, id }, onDelete }) => {
   return (
     <div style={ styles }>
+      <h1 className='display-1'></h1>
       <h2>{ title }</h2>
       <p>{ body }</p>
       <button className="btn btn-danger" type="button" onClick={() => onDelete(id)}>
-        Remove
+        Remove Feeds
       </button>
     </div>
   );
